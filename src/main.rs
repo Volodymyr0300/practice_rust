@@ -62,10 +62,20 @@ fn descending_order(x: u64) -> u64 {
     digits.iter().collect::<String>().parse::<u64>().unwrap() // Collect the characters back into a string and parse it as u64
 }
 
+// You will be given a list of strings. You must sort it alphabetically (case-sensitive, and based on the ASCII values of the chars) and then return the first value. The returned value must be a string, and have "***" between each of its letters. You should not remove or add elements from/to the array.
+fn two_sort(arr: &[&str]) -> String {
+    arr.iter()
+        .min() // Find the lexicographically smallest string
+        .map(|s| s.chars().map(|c| c.to_string()).collect::<Vec<String>>().join("***")) // Insert "***" between each character
+        .unwrap_or_default() // Return an empty string if the array is empty
+}
+
 fn main() {
     println!("The shortest word contains {} characters.", find_short("bitcoin take over the world maybe who knows perhaps"));
     println!("The Quarter of Month is {}", quarter_of(4));
     println!("The array of all integers between the input parameters is {:?}", between(1, 5));
     println!("The number in words is {}", switch_it_up(7));
-    println!("The highest possible number is {}", descending_order(872345));
+    println!("The highest possible number is {}", descending_order(1452368));
+    println!("The first value with '***' between each of its letters is {}", two_sort(&["bitcoin", "take", "over", "the", "world", "maybe", "who", "knows", "perhaps"]));
+    
 }
