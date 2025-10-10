@@ -64,10 +64,30 @@ fn descending_order(x: u64) -> u64 {
 
 // You will be given a list of strings. You must sort it alphabetically (case-sensitive, and based on the ASCII values of the chars) and then return the first value. The returned value must be a string, and have "***" between each of its letters. You should not remove or add elements from/to the array.
 fn two_sort(arr: &[&str]) -> String {
-    arr.iter()
-        .min() // Find the lexicographically smallest string
-        .map(|s| s.chars().map(|c| c.to_string()).collect::<Vec<String>>().join("***")) // Insert "***" between each character
-        .unwrap_or_default() // Return an empty string if the array is empty
+    arr
+    .iter()
+    .min() // Finds the smallest string (&str)
+    .map(|s| {
+        // Converts the smallest string to a char iterator,
+        // then maps each character to a String, and joins them.
+        s.chars()
+            .map(|c| c.to_string())
+            .collect::<Vec<String>>()
+            .join("***")
+        })
+        .unwrap_or_default()
+}
+
+// Build a function that returns an array of integers from n to 1 where n>0. Example : n=5 --> [5,4,3,2,1]
+fn reverse_seq(n: u32) -> Vec<u32> {
+    (1..=n).rev().collect()
+}
+
+// Finish the solution so that it sorts the passed in array of numbers. If the function passes in an empty array or null/nil value then it should return an empty array.
+fn sort_numbers(arr: &Vec<i32>) -> Vec<i32> {
+    let mut sorted_arr = arr.clone(); // Clone the input array to avoid modifying it
+    sorted_arr.sort(); // Sort the cloned array in ascending order
+    sorted_arr // Return the sorted array 
 }
 
 fn main() {
@@ -77,5 +97,6 @@ fn main() {
     println!("The number in words is {}", switch_it_up(7));
     println!("The highest possible number is {}", descending_order(1452368));
     println!("The first value with '***' between each of its letters is {}", two_sort(&["bitcoin", "take", "over", "the", "world", "maybe", "who", "knows", "perhaps"]));
-    
+    println!("The array of integers from n to 1 is {:?}", reverse_seq(5));
+    println!("The sorted array is {:?}", sort_numbers(&vec![5, 3, 2, 8, 1]));
 }
